@@ -1,6 +1,6 @@
-// Rover grid - obstacle marked with "X"
+// Rover grid - obstacle marked with "X", rover marked with "R" and a number
 const grid = [
-  ["R1", "", "", "", "", "X", "", "", "", ""],
+  ["", "", "", "", "", "X", "", "", "", ""],
   ["", "", "", "", "", "", "", "X", "", ""],
   ["", "", "X", "", "", "", "", "", "", ""],
   ["", "", "", "", "", "", "", "", "", ""],
@@ -24,11 +24,24 @@ const rover1 = {
 const rover2 = {
   name: "R2",
   direction: "N",
-  x: 0,
-  y: 0,
+  x: 4,
+  y: 3,
   travelLog: [],
 };
+
+const rover3 = {
+  name: "R3",
+  direction: "S",
+  x: 8,
+  y: 5,
+  travelLog: [],
+};
+
 // ======================
+
+function setRoverToGrid(rover) {
+  grid[rover.y][rover.x] = rover.name;
+}
 
 function turnLeft(rover) {
   let direction = rover.direction;
@@ -89,6 +102,9 @@ function moveForward(rover) {
   } else if (locationHasObstacle(rover)) {
     console.log("Encountered an obstacle, can't move!");
     moveBackward(rover);
+  } else if (locationHasRover(rover)) {
+    console.log("Encountered another rover, can't move!");
+    moveBackward(rover);
   }
 }
 
@@ -115,6 +131,9 @@ function moveBackward(rover) {
   } else if (locationHasObstacle(rover)) {
     console.log("Encountered an obstacle, can't move!");
     moveForward(rover);
+  } else if (locationHasRover(rover)) {
+    console.log("Encountered another rover, can't move!");
+    moveForward(rover);
   }
 }
 
@@ -124,6 +143,10 @@ function isInsideGrid(rover) {
 
 function locationHasObstacle(rover) {
   return grid[rover.y][rover.x] === "X";
+}
+
+function locationHasRover(rover) {
+  return grid[rover.y][rover.x] !== "";
 }
 
 function moveRover(rover, commands) {
@@ -153,12 +176,18 @@ function moveRover(rover, commands) {
     }
     grid[rover.y][rover.x] = rover.name;
     console.log(
-      `Turn: ${i}\nCurrent direction: ${rover.direction}\nCurrent position: x=${rover.x} y=${rover.y}\nGrid:`
+      `Rover: ${rover.name}\nTurn: ${i}\nCurrent direction: ${rover.direction}\nCurrent position: x=${rover.x} y=${rover.y}\nGrid:`
     );
     console.table(grid);
   }
-  console.log("Travel log:");
+  console.log(`Travel log (${rover.name}):`);
   rover.travelLog.forEach((position) => console.log(position));
 }
 
-moveRover(rover1, "rffrfflfffff");
+setRoverToGrid(rover1);
+setRoverToGrid(rover2);
+setRoverToGrid(rover3);
+moveRover(rover1, "rff");
+moveRover(rover2, "fff");
+moveRover(rover3, "frfff");
+moveRover(rover1, "ff");
