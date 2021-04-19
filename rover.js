@@ -187,8 +187,8 @@ function moveRover(rover, commands) {
 setRoverToGrid(rover1);
 setRoverToGrid(rover2);
 setRoverToGrid(rover3);
-moveRover(rover1, "rff");
+moveRover(rover1, "ffrff");
 moveRover(rover2, "fff");
 moveRover(rover3, "frfff");
 moveRover(rover1, "ff");
-moveRover(rover3, "rflfrffffff");
+moveRover(rover3, "rflfrffffffbb");
