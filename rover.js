@@ -14,12 +14,20 @@ const grid = [
 
 // Rover object goes here:
 const rover1 = {
+  name: "R1",
   direction: "N",
   x: 0,
   y: 0,
   travelLog: [],
 };
 
+const rover2 = {
+  name: "R2",
+  direction: "N",
+  x: 0,
+  y: 0,
+  travelLog: [],
+};
 // ======================
 
 function turnLeft(rover) {
@@ -143,7 +151,7 @@ function moveRover(rover, commands) {
         console.log(`Invalid input: ${command}`);
         break;
     }
-    grid[rover.y][rover.x] = "R";
+    grid[rover.y][rover.x] = rover.name;
     console.log(
       `Turn: ${i}\nCurrent direction: ${rover.direction}\nCurrent position: x=${rover.x} y=${rover.y}\nGrid:`
     );
