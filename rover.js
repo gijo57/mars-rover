@@ -191,3 +191,4 @@ moveRover(rover1, "rff");
 moveRover(rover2, "fff");
 moveRover(rover3, "frfff");
 moveRover(rover1, "ff");
+moveRover(rover3, "rflfrffffff");
